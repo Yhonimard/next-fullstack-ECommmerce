@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 /**
  *
  *@param {import("next").NextApiRequest} req
- *@param {import("next").NextApiResponse} req
+ *@param {import("next").NextApiResponse} res
  * */
 
 const signup = async (req, res) => {
@@ -68,7 +68,7 @@ const signup = async (req, res) => {
   try {
     token = jwt.sign(
       { userId: createdUser.id, email: createdUser.email },
-      "somesecretkey"
+      process.env.JWT_KEY
     );
   } catch (error) {
     return res.status(500).json("sign up failed pls try again");
@@ -79,7 +79,8 @@ const signup = async (req, res) => {
   res.status(201).json({
     status: "success",
     message: "signup succeed",
-    result: { token, email: createdUser.email, id: createdUser.id },
+    result: { email: createdUser.email, id: createdUser.id },
+    token,
   });
 };
 
