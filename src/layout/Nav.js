@@ -11,8 +11,8 @@ import {
 } from "./styled";
 import FloatingCart from "../components/FloatingCart/FloatingCart";
 import { useCallback, useEffect, useState } from "react";
-import SettingIcon from "../assets/icons/SettingIcons";
-import LogoutIcon from "../assets/icons/LogoutIcon";
+import SettingIcon from "@//assets/icons/SettingIcons";
+import LogoutIcon from "@//assets/icons/LogoutIcon";
 
 const Nav = () => {
   const [openMenu, setOpenMenu] = useState();
