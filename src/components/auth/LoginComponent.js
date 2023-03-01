@@ -12,14 +12,24 @@ import {
 } from "./styled";
 
 import { LoginSchema } from "@//models/AuthSchema";
+import axios from "axios";
 
 const LoginComponent = () => {
   const router = useRouter();
 
   const { errors, handleSubmit, register } = LoginSchema();
 
-  const submitHandler = (data) => {
+  const submitHandler = async (data) => {
     console.log(data);
+
+    // try {
+    //   const res = await axios.post("/api/auth/login", data).catch((error) => {
+    //     console.log(error);
+    //   });
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
     // router.push("/");
   };
 
@@ -32,12 +42,7 @@ const LoginComponent = () => {
         <hr />
         <Form onSubmit={handleSubmit(submitHandler)}>
           <FormBox>
-            <Input
-              placeholder="email"
-              {...register(
-                "email                                                   "
-              )}
-            />
+            <Input type="email" placeholder="email" {...register("email")} />
             <ErrorMessage>password is required</ErrorMessage>
           </FormBox>
           <FormBox>
