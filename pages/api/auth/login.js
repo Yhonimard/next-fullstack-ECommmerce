@@ -1,4 +1,4 @@
-import userSchema from "@//models/UserSchema";
+import userSchema from "@//models/UserModels";
 import connectMongo from "@//utils/connectMongo";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";

@@ -11,26 +11,41 @@ import {
   Input,
 } from "./styled";
 
+import { LoginSchema } from "@//models/AuthSchema";
+
 const LoginComponent = () => {
   const router = useRouter();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    router.push("/");
+  const { errors, handleSubmit, register } = LoginSchema();
+
+  const submitHandler = (data) => {
+    console.log(data);
+    // router.push("/");
   };
+
+  console.log(errors);
 
   return (
     <Container>
       <Box>
         <h1>login</h1>
         <hr />
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit(submitHandler)}>
           <FormBox>
-            <Input placeholder="username" />
+            <Input
+              placeholder="email"
+              {...register(
+                "email                                                   "
+              )}
+            />
             <ErrorMessage>password is required</ErrorMessage>
           </FormBox>
           <FormBox>
-            <Input placeholder="username" />
+            <Input
+              type="password"
+              placeholder="password"
+              {...register("password")}
+            />
             <ErrorMessage>testing</ErrorMessage>
           </FormBox>
           <Button type="submit">login</Button>

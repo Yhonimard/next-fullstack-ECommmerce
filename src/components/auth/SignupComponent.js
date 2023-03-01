@@ -10,39 +10,51 @@ import {
   FormText,
   Input,
 } from "./styled";
+import { SignupSchema } from "@//models/AuthSchema";
 
 const SignupComponent = () => {
   const router = useRouter();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const { errors, handleSubmit, register } = SignupSchema();
 
+  const signupHandler = (data) => {
+    console.log(data);
     router.replace("/");
   };
+
+  console.log(errors);
 
   return (
     <Container>
       <Box RowGap="20px">
         <h1>Signup</h1>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit(signupHandler)}>
           <FormBox>
-            <Input placeholder="username" />
+            <Input placeholder="username" {...register("username")} />
             <ErrorMessage>testin</ErrorMessage>
           </FormBox>
           <FormBox>
-            <Input placeholder="email" />
+            <Input type="email" placeholder="email" {...register("email")} />
           </FormBox>
           <FormBox>
-            <Input placeholder="age" />
+            <Input placeholder="age" {...register("age")} />
           </FormBox>
           <FormBox>
-            <Input placeholder="address" />
+            <Input placeholder="address" {...register("address")} />
           </FormBox>
           <FormBox>
-            <Input placeholder="password" />
+            <Input
+              type="password"
+              placeholder="password"
+              {...register("password")}
+            />
           </FormBox>
           <FormBox>
-            <Input placeholder="confirm password" />
+            <Input
+              type="password"
+              placeholder="confirm password"
+              {...register("confirmPassword")}
+            />
             <ErrorMessage>testing</ErrorMessage>
           </FormBox>
           <Button type="submit">signup</Button>

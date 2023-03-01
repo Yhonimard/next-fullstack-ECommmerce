@@ -104,7 +104,7 @@ export const LoginButton = styled.button`
   padding: 7px 15px;
   border-radius: 5px;
   border: none;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   background-color: inherit;
   transition: 200ms;
