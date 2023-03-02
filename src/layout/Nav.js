@@ -63,6 +63,7 @@ const Nav = () => {
         </Menu>
       </Toolbar>
       <Typography>testingdoang</Typography>
+      <div></div>
     </AppBar>
 
     // <Container>
