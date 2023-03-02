@@ -9,15 +9,13 @@ export default function App({ Component, pageProps }) {
   const isAuth = router.pathname.startsWith("/auth");
 
   return (
-    <>
-      <Provider store={store}>
-        {isAuth && <Component />}
-        {!isAuth && (
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        )}
-      </Provider>
-    </>
+    <Provider store={store}>
+      {isAuth && <Component />}
+      {!isAuth && (
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      )}
+    </Provider>
   );
 }
