@@ -13,32 +13,37 @@ import {
 
 import { LoginSchema } from "@//models/AuthSchema";
 import axios from "axios";
+import { useState } from "react";
 
 const LoginComponent = () => {
   const router = useRouter();
+  const [error, setError] = useState();
 
   const { errors, handleSubmit, register } = LoginSchema();
 
   const submitHandler = async (data) => {
     console.log(data);
+    try {
+      const res = await axios.post("/api/auth/login", data).catch((error) => {
+        const err = error.response.data.message;
+        throw err;
+      });
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+      return;
+    }
 
-    // try {
-    //   const res = await axios.post("/api/auth/login", data).catch((error) => {
-    //     console.log(error);
-    //   });
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    console.log("run after error");
 
-    // router.push("/");
+    router.push("/");
   };
-
-  console.log(errors);
 
   return (
     <Container>
       <Box>
-        <h1>login</h1>
+        <h1>{error}</h1>
+        <h1>Login</h1>
         <hr />
         <Form onSubmit={handleSubmit(submitHandler)}>
           <FormBox>
