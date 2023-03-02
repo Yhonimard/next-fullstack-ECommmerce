@@ -11,14 +11,38 @@ import {
   Input,
 } from "./styled";
 import { SignupSchema } from "@//models/AuthSchema";
+import axios from "axios";
 
 const SignupComponent = () => {
   const router = useRouter();
 
   const { errors, handleSubmit, register } = SignupSchema();
 
-  const signupHandler = (data) => {
+  const signupHandler = async (data) => {
+    const { confirmPassword, username, email, age, address } = data;
+
     console.log(data);
+
+    const signupData = {
+      username,
+      email,
+      password: confirmPassword,
+      age,
+      address,
+    };
+    try {
+      const res = await axios
+        .post("/api/auth/signup", signupData)
+        .catch((err) => {
+          throw err.response.data.message || "something went wrong ";
+        });
+
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+
     router.replace("/");
   };
 

@@ -22,7 +22,7 @@ const signup = async (req, res) => {
       .json({ message: "signup failed, something went wrong" });
   }
 
-  const { name, email, password, age, address } = req.body;
+  const { username, email, password, age, address } = req.body;
 
   let existingUsers;
 
@@ -51,7 +51,7 @@ const signup = async (req, res) => {
   }
 
   const createdUser = new userSchema({
-    name,
+    username,
     email,
     password: hashPassword,
     age,
