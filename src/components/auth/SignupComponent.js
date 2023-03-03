@@ -12,6 +12,7 @@ import {
 } from "./styled";
 import { SignupSchema } from "@//models/AuthSchema";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const SignupComponent = () => {
   const router = useRouter();
@@ -20,8 +21,6 @@ const SignupComponent = () => {
 
   const signupHandler = async (data) => {
     const { confirmPassword, username, email, age, address } = data;
-
-    console.log(data);
 
     const signupData = {
       username,
@@ -36,8 +35,9 @@ const SignupComponent = () => {
         .catch((err) => {
           throw err.response.data.message || "something went wrong ";
         });
-
-      console.log(res);
+      if (res.data.token) {
+        Cookies.set("token", res.data.token);
+      }
     } catch (error) {
       console.log(error);
       return;
@@ -45,8 +45,6 @@ const SignupComponent = () => {
 
     router.replace("/");
   };
-
-  console.log(errors);
 
   return (
     <Container>

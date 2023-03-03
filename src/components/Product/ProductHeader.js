@@ -4,7 +4,7 @@ import {
   HeaderCategoryBox,
   HeaderCategoryItem,
   HeaderCategory,
-} from "./styled";
+} from './styled';
 const ProductHeader = () => {
   return (
     <HeaderContainer>

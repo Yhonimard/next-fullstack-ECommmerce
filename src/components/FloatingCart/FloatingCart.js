@@ -16,8 +16,8 @@ import {
 } from "./style";
 import { CartIcon } from "../../assets/icons/icons";
 import { useCallback, useEffect, useState } from "react";
-// import Img from "../../../assets/1.png";
 import Img from "../../assets/1.png";
+import { useRouter } from "next/router";
 
 const FloatingCart = () => {
   const [isOpenCart, setIsOpenCart] = useState(false);
@@ -26,7 +26,10 @@ const FloatingCart = () => {
     setIsOpenCart((prev) => !prev);
   }, []);
 
-  const handleNavigate = () => {};
+  const handleNavigate = () => {
+    useRouter().replace('/cart')
+    
+  };
 
   return (
     <>

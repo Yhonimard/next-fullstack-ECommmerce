@@ -17,7 +17,6 @@ const handler = async (req, res) => {
   try {
     await connectMongo();
   } catch (error) {
-    console.log("error from get[id]", error);
     return res.status(500).json("fetching data failed , something went wrong");
   }
 
@@ -25,7 +24,7 @@ const handler = async (req, res) => {
 
   try {
     products = await productSchema.findById(id);
-  } catch (error) { }
+  } catch (error) {}
 
   if (!products)
     return res

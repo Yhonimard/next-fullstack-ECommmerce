@@ -16,7 +16,6 @@ const signup = async (req, res) => {
   try {
     await connectMongo();
   } catch (error) {
-    console.log("error from signup", error);
     return res
       .status(500)
       .json({ message: "signup failed, something went wrong" });
@@ -29,7 +28,6 @@ const signup = async (req, res) => {
   try {
     existingUsers = await userSchema.findOne({ email: email });
   } catch (error) {
-    console.log("error from existingUsers", error);
     return res
       .status(500)
       .json({ message: "signup failed pls try again later" });
@@ -44,7 +42,6 @@ const signup = async (req, res) => {
   try {
     hashPassword = await bcrypt.hash(password, 10);
   } catch (error) {
-    console.log("error from hash password", error);
     return res
       .status(500)
       .json({ message: "could not create user pls try again" });
@@ -73,8 +70,6 @@ const signup = async (req, res) => {
   } catch (error) {
     return res.status(500).json("sign up failed pls try again");
   }
-
-  console.log("createdUser", createdUser);
 
   res.status(201).json({
     status: "success",

@@ -82,8 +82,6 @@ export const MenuItem = styled.div`
   justify-content: center;
   width: 100%;
   padding: 5px;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
   cursor: pointer;
   transition: 200ms all;
   column-gap: 10px;
@@ -102,9 +100,9 @@ export const MenuText = styled.h6`
 
 export const LoginButton = styled.button`
   padding: 7px 15px;
-  border-radius: 5px;
+  border-radius: 4px;
   border: none;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   background-color: inherit;
   transition: 200ms;

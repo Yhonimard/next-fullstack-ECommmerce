@@ -1,100 +1,68 @@
-// import {
-//   Container,
-//   TextLogo,
-//   Box,
-//   Avatar,
-//   RightBox,
-//   // Menu,
-//   MenuList,
-//   MenuItem,
-//   MenuText,
-//   LoginButton,
-// } from "./styled";
-import FloatingCart from "../components/FloatingCart/FloatingCart";
-import { useCallback, useEffect, useState } from "react";
-import SettingIcon from "@//assets/icons/SettingIcons";
-import LogoutIcon from "@//assets/icons/LogoutIcon";
-import { useSelector } from "react-redux";
-import { useRouter } from "next/router";
+import { useCallback, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  AppBar,
   Avatar,
-  CssBaseline,
-  IconButton,
+  Box,
+  Container,
+  LoginButton,
   Menu,
   MenuItem,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+  MenuList,
+  MenuText,
+  RightBox,
+  TextLogo,
+} from "./styled";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
+import { isAuth } from "../redux/GlobalState";
+import FloatingCart from "../components/FloatingCart/FloatingCart";
 
 const Nav = () => {
-  const [openMenu, setOpenMenu] = useState(false);
-  const router = useRouter();
-
   const { isLogin } = useSelector((state) => state.global);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const handleOpenMenu = useCallback(() => {
-    setOpenMenu((prev) => !prev);
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  const openMenuHandler = useCallback(() => {
+    setIsOpen((state) => !state);
   }, []);
 
-  // const handleNavigate = () => {
-  //   router.push("/auth/login");
-  // };
+  const handleNavigate = () => {
+    router.replace("/auth/login");
+  };
+
+  const logoutHandler = () => {
+    Cookies.remove("token");
+    dispatch(isAuth(false));
+  };
 
   return (
-    <AppBar color="default">
-      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Typography>Yhonimard</Typography>
-        <IconButton onClick={handleOpenMenu}>
-          <Avatar size="sm" sx={{ width: 32, height: 32 }} />
-        </IconButton>
-        <Menu
-          open={openMenu}
-          onClose={handleOpenMenu}
-          anchorOrigin={{ vertical: "top", horizontal: "right" }}
-          transformOrigin={{ vertical: "top", horizontal: "right" }}
-        >
-          <MenuItem>testing</MenuItem>
-          <MenuItem>testing</MenuItem>
-          <MenuItem>testing</MenuItem>
-          <MenuItem>testing</MenuItem>
-          <MenuItem>testing</MenuItem>
-          <MenuItem>testing</MenuItem>
-        </Menu>
-      </Toolbar>
-      <Typography>testingdoang</Typography>
-      <div className=""></div>
-    </AppBar>
-
-    // <Container>
-    //   <Box>
-    //     <TextLogo>Yhonimard</TextLogo>
-    //   </Box>
-    //   <RightBox>
-    //     {!isLogin && <LoginButton onClick={handleNavigate}>login</LoginButton>}
-    //     {isLogin && (
-    //       <>
-    //         <FloatingCart />
-    //         <Avatar
-    //           src={"https://source.unsplash.com/300x300"}
-    //           onClick={handleOpenMenu}
-    //         />
-    //         <Menu isOpen={openMenu}>
-    //           <MenuList>
-    //             <MenuItem>
-    //               <SettingIcon />
-    //               <MenuText>Settings</MenuText>
-    //             </MenuItem>
-    //             <MenuItem>
-    //               <LogoutIcon />
-    //               <MenuText>Logout</MenuText>
-    //             </MenuItem>
-    //           </MenuList>
-    //         </Menu>
-    //       </>
-    //     )}
-    //   </RightBox>
-    // </Container>
+    <Container>
+      <Box>
+        <TextLogo>Yhonimard</TextLogo>
+      </Box>
+      {!isLogin && <LoginButton onClick={handleNavigate}>Login</LoginButton>}
+      {isLogin && (
+        <RightBox>
+          <FloatingCart />
+          <Avatar
+            src="https://source.unsplash.com/300x300"
+            onClick={openMenuHandler}
+          />
+          <Menu isOpen={isOpen}>
+            <MenuList>
+              <MenuItem>
+                <MenuText>Settings</MenuText>
+              </MenuItem>
+              <MenuItem>
+                <MenuText onClick={logoutHandler}>Logout</MenuText>
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </RightBox>
+      )}
+    </Container>
   );
 };
 

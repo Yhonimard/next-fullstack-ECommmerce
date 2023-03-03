@@ -8,7 +8,6 @@ const middlerware = (req) => {
   const res = NextResponse;
 
   if (req.nextUrl.pathname.startsWith("/api/products")) {
-    console.log("ini dari middleware folder");
     // res.json({ message: "is from middleware folder" });
   }
 

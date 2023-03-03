@@ -10,25 +10,29 @@ import {
   Grid,
 } from "./styled";
 
-const ProductList = (params) => {
+const ProductList = ({ data }) => {
   const img = "https://source.unsplash.com/500x500";
   // const img2 = 'https://source.unsplash.com/1000x1000?programming';
 
   const handleNavigate = () => {};
+  console.log(data);
+  const { result: datas } = data;
 
   return (
     <Container>
       <Grid>
-        <Col>
-          <Card onClick={handleNavigate}>
-            <CardImg src={img} />
-            <CardContent>
-              <CardTitle>testing</CardTitle>
-              <CardText>testing testing testing</CardText>
-              <CardPrice>$14</CardPrice>
-            </CardContent>
-          </Card>
-        </Col>
+        {datas.map((i) => (
+          <Col>
+            <Card onClick={handleNavigate}>
+              <CardImg src={`${img}?${i.name}`} />
+              <CardContent>
+                <CardTitle>{i.name}</CardTitle>
+                <CardText>description description description</CardText>
+                <CardPrice>${i.price}</CardPrice>
+              </CardContent>
+            </Card>
+          </Col>
+        ))}
       </Grid>
     </Container>
   );

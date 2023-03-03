@@ -10,10 +10,10 @@ import {
   FormText,
   Input,
 } from "./styled";
-
 import { LoginSchema } from "@//models/AuthSchema";
 import axios from "axios";
 import { useState } from "react";
+import Cookies from "js-cookie";
 
 const LoginComponent = () => {
   const router = useRouter();
@@ -22,13 +22,15 @@ const LoginComponent = () => {
   const { errors, handleSubmit, register } = LoginSchema();
 
   const submitHandler = async (data) => {
-    console.log(data);
     try {
       const res = await axios.post("/api/auth/login", data).catch((error) => {
         const err = error.response.data.message;
         throw err;
       });
-      console.log(res);
+
+      if (res.data.token) {
+        Cookies.set("token", res.data.token);
+      }
     } catch (error) {
       console.log(error);
       return;
