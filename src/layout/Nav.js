@@ -1,21 +1,21 @@
 import { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Avatar,
-  Box,
-  Container,
-  LoginButton,
-  Menu,
-  MenuItem,
-  MenuList,
-  MenuText,
-  RightBox,
-  TextLogo,
-} from "./styled";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { isAuth } from "../redux/GlobalState";
-import FloatingCart from "../components/FloatingCart/FloatingCart";
+import {
+  Avatar,
+  Flex,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  HStack,
+  Spacer,
+  Text,
+} from "@chakra-ui/react";
+import Icon from "../assets/test.svg";
 
 const Nav = () => {
   const { isLogin } = useSelector((state) => state.global);
@@ -38,31 +38,56 @@ const Nav = () => {
   };
 
   return (
-    <Container>
-      <Box>
-        <TextLogo>Yhonimard</TextLogo>
-      </Box>
-      {!isLogin && <LoginButton onClick={handleNavigate}>Login</LoginButton>}
-      {isLogin && (
-        <RightBox>
-          <FloatingCart />
-          <Avatar
-            src="https://source.unsplash.com/300x300"
-            onClick={openMenuHandler}
+    <Flex h={`14`} align="center" paddingX={"5"} boxShadow="base">
+      <Text fontWeight={"bold"} fontSize="larger">
+        Yhonimard
+      </Text>
+      <Spacer />
+
+      <HStack align={`center`}>
+        <Icon />
+
+        <Menu>
+          <MenuButton
+            as={Avatar}
+            aria-label="avatar button"
+            cursor="pointer"
+            w="9"
+            h="9"
           />
-          <Menu isOpen={isOpen}>
-            <MenuList>
-              <MenuItem>
-                <MenuText>Settings</MenuText>
-              </MenuItem>
-              <MenuItem>
-                <MenuText onClick={logoutHandler}>Logout</MenuText>
-              </MenuItem>
-            </MenuList>
-          </Menu>
-        </RightBox>
-      )}
-    </Container>
+          <MenuList>
+            <MenuItem>testing</MenuItem>
+            <MenuItem>testing</MenuItem>
+            <MenuItem>testing</MenuItem>
+          </MenuList>
+        </Menu>
+      </HStack>
+    </Flex>
+    // <Container>
+    //   <Box>
+    //     <TextLogo>Yhonimard</TextLogo>
+    //   </Box>
+    //   {!isLogin && <LoginButton onClick={handleNavigate}>Login</LoginButton>}
+    //   {isLogin && (
+    //     <RightBox>
+    //       <FloatingCart />
+    //       <Avatar
+    //         src="https://source.unsplash.com/300x300"
+    //         onClick={openMenuHandler}
+    //       />
+    //       <Menu isOpen={isOpen}>
+    //         <MenuList>
+    //           <MenuItem>
+    //             <MenuText>Settings</MenuText>
+    //           </MenuItem>
+    //           <MenuItem>
+    //             <MenuText onClick={logoutHandler}>Logout</MenuText>
+    //           </MenuItem>
+    //         </MenuList>
+    //       </Menu>
+    //     </RightBox>
+    //   )}
+    // </Container>
   );
 };
 

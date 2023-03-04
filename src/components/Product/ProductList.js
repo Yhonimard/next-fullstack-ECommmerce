@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import {
   Card,
   CardContent,
@@ -12,22 +13,24 @@ import {
 
 const ProductList = ({ data }) => {
   const img = "https://source.unsplash.com/500x500";
-  // const img2 = 'https://source.unsplash.com/1000x1000?programming';
+  const router = useRouter();
 
-  const handleNavigate = () => {};
-  console.log(data);
+  const handleNavigate = (id) => {
+    router.replace(`/product-list/${id}`);
+  };
+
   const { result: datas } = data;
 
   return (
     <Container>
       <Grid>
         {datas.map((i) => (
-          <Col>
+          <Col key={i.id} onClick={() => handleNavigate(i.id)}>
             <Card onClick={handleNavigate}>
               <CardImg src={`${img}?${i.name}`} />
               <CardContent>
                 <CardTitle>{i.name}</CardTitle>
-                <CardText>description description description</CardText>
+                <CardText>{i.description}</CardText>
                 <CardPrice>${i.price}</CardPrice>
               </CardContent>
             </Card>
