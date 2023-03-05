@@ -26,10 +26,15 @@ const Nav = () => {
     <div className="w-full h-14 px-8 items-center flex justify-between shadow-md ">
       <h6 className="font-semibold text-lg">YHONIMARD</h6>
       <div className="flex items-center gap-4">
-        <CartIcon className={"cursor-pointer"} />
+        <div className="relative flex">
+          <CartIcon className={"cursor-pointer flex-1"} />
+          <span className="absolute p-0 m-0 -right-1 -top-[2px] rounded-full  bg-red-500 w-3 h-3 text-center text-xs leading-tight">
+            5
+          </span>
+        </div>
 
         <Menu as="div" className="relative">
-          <Menu.Button>
+          <Menu.Button className="mt-1">
             <Image
               src="http://source.unsplash.com/300x300"
               width={300}
