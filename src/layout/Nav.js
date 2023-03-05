@@ -1,35 +1,20 @@
-import { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import Cookies from "js-cookie";
 import { isAuth } from "../redux/GlobalState";
-import {
-  Avatar,
-  Flex,
-  IconButton,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  HStack,
-  Spacer,
-  Text,
-} from "@chakra-ui/react";
-import Icon from "../assets/test.svg";
+import { CartIcon } from "../assets/Icon";
+import Cookies from "js-cookie";
+import Image from "next/image";
+import { Menu, Transition } from "@headlessui/react";
+import { Fragment } from "react";
 
 const Nav = () => {
   const { isLogin } = useSelector((state) => state.global);
-  const [isOpen, setIsOpen] = useState(false);
 
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const openMenuHandler = useCallback(() => {
-    setIsOpen((state) => !state);
-  }, []);
-
   const handleNavigate = () => {
-    router.replace("/auth/login");
+    router.push("/auth/login");
   };
 
   const logoutHandler = () => {
@@ -38,56 +23,43 @@ const Nav = () => {
   };
 
   return (
-    <Flex h={`14`} align="center" paddingX={"5"} boxShadow="base">
-      <Text fontWeight={"bold"} fontSize="larger">
-        Yhonimard
-      </Text>
-      <Spacer />
+    <div className="w-full h-14 px-8 items-center flex justify-between shadow-md ">
+      <h6 className="font-semibold text-lg">YHONIMARD</h6>
+      <div className="flex items-center gap-4">
+        <CartIcon className={"cursor-pointer"} />
 
-      <HStack align={`center`}>
-        <Icon />
-
-        <Menu>
-          <MenuButton
-            as={Avatar}
-            aria-label="avatar button"
-            cursor="pointer"
-            w="9"
-            h="9"
-          />
-          <MenuList>
-            <MenuItem>testing</MenuItem>
-            <MenuItem>testing</MenuItem>
-            <MenuItem>testing</MenuItem>
-          </MenuList>
+        <Menu as="div" className="relative">
+          <Menu.Button>
+            <Image
+              src="http://source.unsplash.com/300x300"
+              width={300}
+              height={300}
+              loader={({ src }) => src}
+              alt="user"
+              className="w-7 h-7 rounded-full cursor-pointer"
+            />
+          </Menu.Button>
+          <Transition
+            as={Fragment}
+            enter="transition ease-out duration-100"
+            enterFrom="transform opacity-0 scale-95"
+            enterTo="transform opacity-100 scale-100"
+            leave="transition ease-in duration-75"
+            leaveFrom="transform opacity-100 scale-100"
+            leaveTo="transform opacity-0 scale-95"
+          >
+            <Menu.Items className="absolute bg-white right-10 top-12 shadow-md rounded-md overflow-hidden">
+              <Menu.Item
+                as="div"
+                className="cursor-pointer px-4 py-2 hover:bg-gray-200 transition duration-300 text-base font-normal"
+              >
+                testing
+              </Menu.Item>
+            </Menu.Items>
+          </Transition>
         </Menu>
-      </HStack>
-    </Flex>
-    // <Container>
-    //   <Box>
-    //     <TextLogo>Yhonimard</TextLogo>
-    //   </Box>
-    //   {!isLogin && <LoginButton onClick={handleNavigate}>Login</LoginButton>}
-    //   {isLogin && (
-    //     <RightBox>
-    //       <FloatingCart />
-    //       <Avatar
-    //         src="https://source.unsplash.com/300x300"
-    //         onClick={openMenuHandler}
-    //       />
-    //       <Menu isOpen={isOpen}>
-    //         <MenuList>
-    //           <MenuItem>
-    //             <MenuText>Settings</MenuText>
-    //           </MenuItem>
-    //           <MenuItem>
-    //             <MenuText onClick={logoutHandler}>Logout</MenuText>
-    //           </MenuItem>
-    //         </MenuList>
-    //       </Menu>
-    //     </RightBox>
-    //   )}
-    // </Container>
+      </div>
+    </div>
   );
 };
 

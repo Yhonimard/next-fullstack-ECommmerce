@@ -8,7 +8,6 @@ import axios from "axios";
 
 export default function Home({ data }) {
   const dispatch = useDispatch();
-  console.log(data);
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -35,7 +34,3 @@ export const getStaticProps = async () => {
     },
   };
 };
-
-// "name " : "T-shirt erigo",
-// "category" : "T-shirt",
-// "price": 19
