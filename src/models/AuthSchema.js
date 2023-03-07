@@ -9,9 +9,9 @@ export const SignupSchema = () => {
       .min(4, "usernmae should be more than 6")
       .required("username is required"),
     age: yup
-      .number()
+      .number("age must be a number")
       .min(15, "Age must be older than 15y")
-      .max(70, "Age must be younger than 17y")
+      .max(70, "Age must be younger than 70y")
       .positive("name should be positive")
       .integer("age cant be filled with a comma")
       .required("age is required"),

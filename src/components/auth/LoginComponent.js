@@ -12,7 +12,6 @@ const LoginComponent = () => {
   const { errors, handleSubmit, register } = LoginSchema();
 
   const submitHandler = async (data) => {
-    console.log(data);
     try {
       const res = await axios.post("/api/auth/login", data).catch((error) => {
         const err = error.response.data.message;
@@ -45,7 +44,8 @@ const LoginComponent = () => {
           <div className="w-full">
             <input
               type="text"
-              className="block px-1 py-2 rounded-md border border-gray-400 w-full"
+              className="block px-2 py-2 rounded-md border border-gray-400 w-full"
+              placeholder="email"
               {...register("email")}
             />
             <h6 className="text-sm ml-1 transition-all duration-500">
@@ -55,7 +55,8 @@ const LoginComponent = () => {
           <div className="w-full">
             <input
               type="password"
-              className="block px-1 py-2 rounded-md border border-gray-400 w-full"
+              placeholder="password"
+              className="block px-2 py-2 rounded-md border border-gray-400 w-full"
               {...register("password")}
             />
             <h6 className="text-sm ml-1">{errors?.password?.message}</h6>
@@ -68,9 +69,9 @@ const LoginComponent = () => {
               submit
             </button>
             <span className="">
-              dont have an account?{" "}
-              <Link href="/auth/signup" className="text-blue-600 underline">
-                signup
+              have an account
+              <Link href="/auth/login" className="text-blue-600 underline">
+                login
               </Link>
             </span>
           </div>

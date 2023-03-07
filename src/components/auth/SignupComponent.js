@@ -1,15 +1,5 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import {
-  Box,
-  Button,
-  Container,
-  ErrorMessage,
-  Form,
-  FormBox,
-  FormText,
-  Input,
-} from "./styled";
 import { SignupSchema } from "@//models/AuthSchema";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -46,10 +36,11 @@ const SignupComponent = () => {
     router.replace("/");
   };
 
+  console.log(errors);
   return (
     <div className="container mx-auto min-h-screen flex items-center">
       <div
-        className="max-w-lg h-[530px]  mx-auto flex items-center justify-center shadow-lg rounded-md border-2
+        className="min-w-[380px] h-[550px]  mx-auto flex items-center justify-center shadow-lg rounded-md border-2
         flex-col gap-7"
       >
         <h6 className="text-4xl font-semibold justify-self-start">signup</h6>
@@ -61,7 +52,20 @@ const SignupComponent = () => {
           <div className="w-full">
             <input
               type="text"
-              className="block px-1 py-2 rounded-md border border-gray-400 w-full"
+              className="block px-2 py-2 rounded-md border border-gray-400 w-full"
+              placeholder="username"
+              {...register("username")}
+            />
+            <h6 className="text-sm ml-1 transition-all duration-500">
+              {errors?.username?.message}
+            </h6>
+          </div>
+
+          <div className="w-full">
+            <input
+              type="text"
+              placeholder="email"
+              className="block px-2 py-2 rounded-md border border-gray-400 w-full"
               {...register("email")}
             />
             <h6 className="text-sm ml-1 transition-all duration-500">
@@ -71,44 +75,47 @@ const SignupComponent = () => {
 
           <div className="w-full">
             <input
-              type="text"
-              className="block px-1 py-2 rounded-md border border-gray-400 w-full"
-              {...register("email")}
+              type="number"
+              className="block px-2 py-2 rounded-md border border-gray-400 w-full"
+              placeholder="age"
+              {...register("age")}
             />
             <h6 className="text-sm ml-1 transition-all duration-500">
-              {errors?.email?.message}
+              {errors?.age?.message}
             </h6>
           </div>
-
           <div className="w-full">
             <input
               type="text"
-              className="block px-1 py-2 rounded-md border border-gray-400 w-full"
-              {...register("email")}
+              className="block px-2 py-2 rounded-md border border-gray-400 w-full"
+              placeholder="address"
+              {...register("address")}
             />
             <h6 className="text-sm ml-1 transition-all duration-500">
-              {errors?.email?.message}
-            </h6>
-          </div>
-
-          <div className="w-full">
-            <input
-              type="text"
-              className="block px-1 py-2 rounded-md border border-gray-400 w-full"
-              {...register("email")}
-            />
-            <h6 className="text-sm ml-1 transition-all duration-500">
-              {errors?.email?.message}
+              {errors?.address?.message}
             </h6>
           </div>
 
           <div className="w-full">
             <input
               type="password"
-              className="block px-1 py-2 rounded-md border border-gray-400 w-full"
+              className="block px-2 py-2 rounded-md border border-gray-400 w-full"
+              placeholder="password"
               {...register("password")}
             />
-            <h6 className="text-sm ml-1">{errors?.password?.message}</h6>
+            <h6 className="text-sm ml-1 transition-all duration-500">
+              {errors?.password?.message}
+            </h6>
+          </div>
+
+          <div className="w-full">
+            <input
+              type="password"
+              placeholder="confirm password"
+              className="block px-2 py-2 rounded-md border border-gray-400 w-full"
+              {...register("confirmPassword")}
+            />
+            <h6 className="text-sm ml-1">{errors?.confirmPassword?.message}</h6>
           </div>
 
           <div className="flex flex-col">
