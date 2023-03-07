@@ -11,6 +11,13 @@ const theme = extendTheme({
     heading: `'Roboto', sans-serif`,
     body: `'Roboto', sans-serif`,
   },
+  breakpoints: {
+    sm: "600px",
+    md: "900px",
+    lg: "1200px",
+    xl: "1536px",
+    "2xl": "1536px",
+  },
 });
 
 export default function App({ Component, pageProps }) {
