@@ -1,19 +1,38 @@
 import ProductDetailComponent from "@//components/ProductDetail/ProductDetailComponent";
+import axios from "axios";
 
-const ProductId = () => {
+const ProductDetails = ({ data }) => {
+  console.log(data);
   return <ProductDetailComponent />;
 };
 
-export default ProductId;
+export default ProductDetails;
 
-export const getStaticPaths = async (ctx) => {
-  console.log("getStaticPaths", ctx);
+export const getStaticPaths = async () => {
+  const { data } = await axios.get(`http://localhost:3000/api/products/get`);
+
+  const paths = data.result.map((i) => {
+    return {
+      params: {
+        pid: `${i.id}`,
+      },
+    };
+  });
+
   return {
-    paths: {},
-    fallback: true,
+    paths,
+    fallback: false,
   };
 };
 
-export const getStaticProps = (ctx) => {
-  console.log("getStaticProps", ctx);
+export const getStaticProps = async ({ params }) => {
+  const { data } = await axios.get(
+    `http://localhost:3000/api/products/get/${params.pid}`
+  );
+
+  return {
+    props: {
+      data,
+    },
+  };
 };

@@ -42,7 +42,6 @@ const ProductList = ({ data }) => {
               <Text noOfLines={1} lineHeight={1.7}>
                 {i.description}
               </Text>
-
               <HStack>
                 <Text>$50</Text>
                 <Button variant="ghost" size="sm">

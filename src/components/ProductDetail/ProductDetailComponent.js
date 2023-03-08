@@ -7,3 +7,5 @@ const ProductDetailComponent = () => {
     </div>
   );
 };
+
+export default ProductDetailComponent;
