@@ -155,7 +155,7 @@ const SignupComponent = () => {
               have an account ?{" "}
               <Button
                 as={Link}
-                href="/auth/signup"
+                href="/auth/login"
                 variant="link"
                 color="blue.600"
               >
