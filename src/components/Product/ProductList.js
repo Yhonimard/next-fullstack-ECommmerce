@@ -6,20 +6,16 @@ import {
   Heading,
   Img,
   SimpleGrid,
-  CardFooter,
   HStack,
   Button,
-  Flex,
 } from "@chakra-ui/react";
-import Image from "next/image";
 import { useRouter } from "next/router";
 
 const ProductList = ({ data }) => {
-  const img = "https://source.unsplash.com/500x500";
   const router = useRouter();
 
   const handleNavigate = (id) => {
-    router.replace(`/product-list/${id}`);
+    router.push(`/product-detail/${id}`);
   };
 
   const { result: datas } = data;
@@ -36,6 +32,7 @@ const ProductList = ({ data }) => {
             transition="all 300ms"
             cursor="pointer"
             _hover={{ transform: "scale(1.05)" }}
+            onClick={() => handleNavigate(i.id)}
           >
             <Img src={`https://source.unsplash.com/1000x1000?${i.name}`} />
             <CardBody>

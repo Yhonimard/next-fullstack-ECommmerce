@@ -2,12 +2,23 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { LoginSchema } from "@//models/AuthSchema";
 import axios from "axios";
-import { useState } from "react";
 import Cookies from "js-cookie";
+import {
+  Box,
+  Button,
+  Container,
+  Divider,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Heading,
+  Input,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 
 const LoginComponent = () => {
   const router = useRouter();
-  const [error, setError] = useState();
 
   const { errors, handleSubmit, register } = LoginSchema();
 
@@ -30,54 +41,60 @@ const LoginComponent = () => {
   };
 
   return (
-    <div className="container mx-auto min-h-screen flex items-center">
-      <div
-        className="max-w-lg h-[500px]  mx-auto flex items-center justify-center shadow-lg rounded-md border-2
-        flex-col gap-7"
+    <Container minH="100vh" display="flex" alignItems="center">
+      <Box
+        w="full"
+        border="lightgray 1px solid"
+        py={4}
+        px={5}
+        shadow="md"
+        borderRadius="md"
       >
-        <h6 className="text-4xl font-semibold justify-self-start">login</h6>
+        <Heading textAlign="center" lineHeight="short" mb={2}>
+          LOGIN
+        </Heading>
+        <Divider bgColor="blackAlpha.900" mb={7} />
 
-        <form
-          className="flex justify-center flex-col gap-2 w-full px-10"
-          onSubmit={handleSubmit(submitHandler)}
-        >
-          <div className="w-full">
-            <input
-              type="text"
-              className="block px-2 py-2 rounded-md border border-gray-400 w-full"
-              placeholder="email"
-              {...register("email")}
-            />
-            <h6 className="text-sm ml-1 transition-all duration-500">
-              {errors?.email?.message}
-            </h6>
-          </div>
-          <div className="w-full">
-            <input
-              type="password"
-              placeholder="password"
-              className="block px-2 py-2 rounded-md border border-gray-400 w-full"
-              {...register("password")}
-            />
-            <h6 className="text-sm ml-1">{errors?.password?.message}</h6>
-          </div>
-          <div className="flex flex-col">
-            <button
-              className="bg-gray-500 py-2 rounded-md text-white hover:opacity-70 transition-all text-lg"
-              type="submit"
-            >
-              submit
-            </button>
-            <span className="">
-              have an account
-              <Link href="/auth/login" className="text-blue-600 underline">
-                login
-              </Link>
-            </span>
-          </div>
+        <form onSubmit={handleSubmit(submitHandler)}>
+          <Stack spacing={3}>
+            <FormControl isInvalid={errors?.email}>
+              <Input
+                type="email"
+                shadow="sm"
+                {...register("email")}
+                placeholder="email"
+              />
+              {errors.email && (
+                <FormErrorMessage>{errors?.email?.message}</FormErrorMessage>
+              )}
+            </FormControl>
+            <FormControl isInvalid={errors?.password}>
+              <Input
+                type="password"
+                shadow="sm"
+                {...register("password")}
+                placeholder="password"
+              />
+              {errors.email && (
+                <FormErrorMessage>{errors?.password?.message}</FormErrorMessage>
+              )}
+            </FormControl>
+            <Button type="submit">LOGIN</Button>
+            <Text>
+              dont have an account?{" "}
+              <Button
+                as={Link}
+                href="/auth/signup"
+                variant="link"
+                color="blue.600"
+              >
+                signup
+              </Button>
+            </Text>
+          </Stack>
         </form>
-      </div>
-    </div>
+      </Box>
+    </Container>
   );
 };
 

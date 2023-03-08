@@ -13,6 +13,7 @@ export const SignupSchema = () => {
       .min(15, "Age must be older than 15y")
       .max(70, "Age must be younger than 70y")
       .positive("name should be positive")
+
       .integer("age cant be filled with a comma")
       .required("age is required"),
     email: yup.string().email().required("email is required"),

@@ -25,12 +25,7 @@ import {
 const Nav = () => {
   const { isLogin } = useSelector((state) => state.global);
 
-  const router = useRouter();
   const dispatch = useDispatch();
-
-  const handleNavigate = () => {
-    router.push("/auth/login");
-  };
 
   const logoutHandler = () => {
     Cookies.remove("token");
@@ -49,7 +44,6 @@ const Nav = () => {
           variant="ghost"
           colorScheme="blackAlpha"
           color="black"
-          size="sm"
         >
           LOGIN
         </Button>
@@ -112,7 +106,7 @@ const Nav = () => {
             </MenuButton>
             <MenuList>
               <MenuItem>settings</MenuItem>
-              <MenuItem>logout</MenuItem>
+              <MenuItem onClick={logoutHandler}>logout</MenuItem>
             </MenuList>
           </Menu>
         </HStack>

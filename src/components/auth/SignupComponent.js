@@ -3,6 +3,21 @@ import { useRouter } from "next/router";
 import { SignupSchema } from "@//models/AuthSchema";
 import axios from "axios";
 import Cookies from "js-cookie";
+import {
+  Box,
+  Button,
+  Container,
+  Divider,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Heading,
+  Input,
+  NumberInput,
+  NumberInputField,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 
 const SignupComponent = () => {
   const router = useRouter();
@@ -38,103 +53,108 @@ const SignupComponent = () => {
 
   console.log(errors);
   return (
-    <div className="container mx-auto min-h-screen flex items-center">
-      <div
-        className="min-w-[380px] h-[550px]  mx-auto flex items-center justify-center shadow-lg rounded-md border-2
-        flex-col gap-7"
+    <Container minH="100vh" display="flex" alignItems="center">
+      <Box
+        w="full"
+        border="lightgray 1px solid"
+        py={4}
+        px={5}
+        shadow="md"
+        borderRadius="md"
       >
-        <h6 className="text-4xl font-semibold justify-self-start">signup</h6>
+        <Heading textAlign="center" lineHeight="short" mb={2}>
+          SIGNUP
+        </Heading>
+        <Divider bgColor="blackAlpha.900" mb={7} />
 
-        <form
-          className="flex justify-center flex-col gap-2 w-full px-10"
-          onSubmit={handleSubmit(signupHandler)}
-        >
-          <div className="w-full">
-            <input
-              type="text"
-              className="block px-2 py-2 rounded-md border border-gray-400 w-full"
-              placeholder="username"
-              {...register("username")}
-            />
-            <h6 className="text-sm ml-1 transition-all duration-500">
-              {errors?.username?.message}
-            </h6>
-          </div>
+        <form onSubmit={handleSubmit(signupHandler)}>
+          <Stack spacing={3}>
+            <FormControl isInvalid={errors?.email}>
+              <Input
+                shadow="sm"
+                {...register("username")}
+                placeholder="username"
+              />
+              {errors.username && (
+                <FormErrorMessage>{errors?.username?.message}</FormErrorMessage>
+              )}
+            </FormControl>
+            <FormControl isInvalid={errors?.email}>
+              <Input {...register("email")} placeholder="email" />
+              {errors.email && (
+                <FormErrorMessage>{errors?.email?.message}</FormErrorMessage>
+              )}
+            </FormControl>
 
-          <div className="w-full">
-            <input
-              type="text"
-              placeholder="email"
-              className="block px-2 py-2 rounded-md border border-gray-400 w-full"
-              {...register("email")}
-            />
-            <h6 className="text-sm ml-1 transition-all duration-500">
-              {errors?.email?.message}
-            </h6>
-          </div>
-
-          <div className="w-full">
-            <input
-              type="number"
-              className="block px-2 py-2 rounded-md border border-gray-400 w-full"
-              placeholder="age"
-              {...register("age")}
-            />
-            <h6 className="text-sm ml-1 transition-all duration-500">
-              {errors?.age?.message}
-            </h6>
-          </div>
-          <div className="w-full">
-            <input
-              type="text"
-              className="block px-2 py-2 rounded-md border border-gray-400 w-full"
-              placeholder="address"
-              {...register("address")}
-            />
-            <h6 className="text-sm ml-1 transition-all duration-500">
-              {errors?.address?.message}
-            </h6>
-          </div>
-
-          <div className="w-full">
-            <input
-              type="password"
-              className="block px-2 py-2 rounded-md border border-gray-400 w-full"
-              placeholder="password"
-              {...register("password")}
-            />
-            <h6 className="text-sm ml-1 transition-all duration-500">
-              {errors?.password?.message}
-            </h6>
-          </div>
-
-          <div className="w-full">
-            <input
-              type="password"
-              placeholder="confirm password"
-              className="block px-2 py-2 rounded-md border border-gray-400 w-full"
-              {...register("confirmPassword")}
-            />
-            <h6 className="text-sm ml-1">{errors?.confirmPassword?.message}</h6>
-          </div>
-
-          <div className="flex flex-col">
-            <button
-              className="bg-gray-500 py-2 rounded-md text-white hover:opacity-70 transition-all text-lg"
-              type="submit"
+            <NumberInput
+              isInvalid={errors?.age}
+              min={17}
+              max={70}
+              defaultValue={17}
             >
-              submit
-            </button>
-            <span className="">
-              dont have an account?{" "}
-              <Link href="/auth/signup" className="text-blue-600 underline">
-                signup
-              </Link>
-            </span>
-          </div>
+              <NumberInputField
+                shadow="sm"
+                {...register("age")}
+                placeholder="age"
+              />
+              <Text color="red.500" fontSize="sm" mt="1.5">
+                {errors.age && errors.age.message}
+              </Text>
+            </NumberInput>
+
+            <FormControl isInvalid={errors?.address}>
+              <Input
+                type="number"
+                shadow="sm"
+                {...register("address")}
+                placeholder="address"
+              />
+              {errors.address && (
+                <FormErrorMessage>{errors?.address?.message}</FormErrorMessage>
+              )}
+            </FormControl>
+
+            <FormControl isInvalid={errors?.password}>
+              <Input
+                type="password"
+                shadow="sm"
+                {...register("password")}
+                placeholder="password"
+              />
+              {errors.password && (
+                <FormErrorMessage>{errors?.password?.message}</FormErrorMessage>
+              )}
+            </FormControl>
+            <FormControl isInvalid={errors?.confirmPassword}>
+              <Input
+                type="password"
+                shadow="sm"
+                {...register("confirmPassword")}
+                placeholder="confirm password"
+              />
+              {errors.confirmPassword && (
+                <FormErrorMessage>
+                  {errors?.confirmPassword?.message}
+                </FormErrorMessage>
+              )}
+            </FormControl>
+
+            <Button type="submit">LOGIN</Button>
+            <Text>
+              have an account ?{" "}
+              <Button
+                as={Link}
+                href="/auth/signup"
+                variant="link"
+                color="blue.600"
+              >
+                login
+              </Button>
+            </Text>
+          </Stack>
         </form>
-      </div>
-    </div>
+      </Box>
+    </Container>
   );
 };
 export default SignupComponent;
