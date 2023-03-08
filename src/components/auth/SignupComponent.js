@@ -53,7 +53,13 @@ const SignupComponent = () => {
 
   console.log(errors);
   return (
-    <Container minH="100vh" display="flex" alignItems="center">
+    <Container
+      minH="100vh"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      py={10}
+    >
       <Box
         w="full"
         border="lightgray 1px solid"
@@ -61,6 +67,11 @@ const SignupComponent = () => {
         px={5}
         shadow="md"
         borderRadius="md"
+        maxW="sm"
+        minH="lg"
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
       >
         <Heading textAlign="center" lineHeight="short" mb={2}>
           SIGNUP

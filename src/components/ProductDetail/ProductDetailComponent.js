@@ -1,10 +1,10 @@
-const ProductDetailComponent = () => {
+const ProductDetailComponent = ({ data }) => {
   // const img = "https://source.unsplash.com/500x500";
-
+  console.log(data);
   return (
-    <div>
-      <h1>product detail component</h1>
-    </div>
+    <>
+      <h1>detail</h1>
+    </>
   );
 };
 

@@ -2,8 +2,11 @@ import ProductDetailComponent from "@//components/ProductDetail/ProductDetailCom
 import axios from "axios";
 
 const ProductDetails = ({ data }) => {
-  console.log(data);
-  return <ProductDetailComponent />;
+  return (
+    <>
+      <ProductDetailComponent data={data} />
+    </>
+  );
 };
 
 export default ProductDetails;
@@ -21,15 +24,16 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 };
 
 export const getStaticProps = async ({ params }) => {
+  const { pid } = params;
   const { data } = await axios.get(
-    `http://localhost:3000/api/products/get/${params.pid}`
+    `http://localhost:3000/api/products/get/${pid}`
   );
-
+  console.log(data);
   return {
     props: {
       data,

@@ -41,7 +41,12 @@ const LoginComponent = () => {
   };
 
   return (
-    <Container minH="100vh" display="flex" alignItems="center">
+    <Container
+      minH="100vh"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+    >
       <Box
         w="full"
         border="lightgray 1px solid"
@@ -49,11 +54,18 @@ const LoginComponent = () => {
         px={5}
         shadow="md"
         borderRadius="md"
+        maxW="sm"
+        minH="md"
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
       >
-        <Heading textAlign="center" lineHeight="short" mb={2}>
-          LOGIN
-        </Heading>
-        <Divider bgColor="blackAlpha.900" mb={7} />
+        <Box>
+          <Heading textAlign="center" lineHeight="short" mb={2}>
+            LOGIN
+          </Heading>
+          <Divider bgColor="blackAlpha.900" mb={7} />
+        </Box>
 
         <form onSubmit={handleSubmit(submitHandler)}>
           <Stack spacing={3}>
