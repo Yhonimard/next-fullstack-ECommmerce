@@ -4,7 +4,7 @@ import axios from "axios";
 const ProductDetails = ({ data }) => {
   return (
     <>
-      <ProductDetailComponent datis={data} />
+      <ProductDetailComponent datos={data} />
     </>
   );
 };
