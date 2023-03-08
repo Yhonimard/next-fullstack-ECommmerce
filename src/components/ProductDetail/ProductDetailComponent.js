@@ -1,4 +1,4 @@
-const ProductDetailComponent = ({ datos }) => {
+const ProductDetailComponent = ({ datis }) => {
   // const img = "https://source.unsplash.com/500x500";
   return (
     <>
