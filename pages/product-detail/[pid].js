@@ -4,7 +4,7 @@ import axios from "axios";
 const ProductDetails = ({ data }) => {
   return (
     <>
-      <ProductDetailComponent datrs={data} />
+      <ProductDetailComponent data={data} />
     </>
   );
 };
@@ -33,7 +33,6 @@ export const getStaticProps = async ({ params }) => {
   const { data } = await axios.get(
     `http://localhost:3000/api/products/get/${pid}`
   );
-  console.log(data);
   return {
     props: {
       data,

@@ -1,3 +1,4 @@
+import { CartPlusIcon } from "@//assets/Icon";
 import {
   Card,
   CardBody,
@@ -8,6 +9,7 @@ import {
   SimpleGrid,
   HStack,
   Button,
+  IconButton,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
@@ -34,7 +36,10 @@ const ProductList = ({ data }) => {
             _hover={{ transform: "scale(1.05)" }}
             onClick={() => handleNavigate(i.id)}
           >
-            <Img src={`https://source.unsplash.com/1000x1000?${i.name}`} />
+            <Img
+              src={`https://source.unsplash.com/1000x1000?${i.name}`}
+              objectFit="cover"
+            />
             <CardBody>
               <Heading size="sm" noOfLines={1}>
                 {i.name}
@@ -42,11 +47,14 @@ const ProductList = ({ data }) => {
               <Text noOfLines={1} lineHeight={1.7}>
                 {i.description}
               </Text>
-              <HStack>
-                <Text>$50</Text>
-                <Button variant="ghost" size="sm">
-                  add
-                </Button>
+              <HStack justify="space-between">
+                <Text fontWeight="medium">$50</Text>
+                <IconButton
+                  icon={<CartPlusIcon size={18} />}
+                  isRound
+                  size="sm"
+                  variant="ghost"
+                />
               </HStack>
             </CardBody>
           </Card>
