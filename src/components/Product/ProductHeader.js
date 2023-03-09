@@ -2,10 +2,11 @@ import { Box, Button, Divider, Flex, Heading, Text } from "@chakra-ui/react";
 
 const ProductHeader = () => {
   return (
-    <Flex h="50vh" direction="column">
+    <Flex h={["50vh", null, "70vh"]} direction="column">
       <Heading m="auto">explore product</Heading>
 
-      <Box py={2} overflowX={["scroll", "auto"]} borderY="groove 1px">
+      <Divider bgColor="lightgray" />
+      <Box py={2} overflowX={["scroll", "auto"]}>
         <Flex
           justify="center"
           align="center"
@@ -18,6 +19,7 @@ const ProductHeader = () => {
           </Button>
         </Flex>
       </Box>
+      <Divider bgColor="lightgray" />
     </Flex>
   );
 };
