@@ -10,7 +10,6 @@ import {
   Divider,
   FormControl,
   FormErrorMessage,
-  FormLabel,
   Heading,
   Input,
   NumberInput,
@@ -115,7 +114,6 @@ const SignupComponent = () => {
 
             <FormControl isInvalid={errors?.address}>
               <Input
-                type="number"
                 shadow="sm"
                 {...register("address")}
                 placeholder="address"
@@ -150,7 +148,7 @@ const SignupComponent = () => {
               )}
             </FormControl>
 
-            <Button type="submit">LOGIN</Button>
+            <Button type="submit">SIGNUP</Button>
             <Text>
               have an account ?{" "}
               <Button

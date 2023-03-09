@@ -35,7 +35,6 @@ const Nav = () => {
   return (
     <Flex h="60px" align="center" px={4} boxShadow="lg">
       <Heading size="sm">YHONIMARD</Heading>
-
       <Spacer />
       {!isLogin && (
         <Button
@@ -55,7 +54,7 @@ const Nav = () => {
               as={IconButton}
               variant="ghost"
               isRound={true}
-              icon={<CartIcon />}
+              icon={<CartIcon size={25} />}
             />
             <MenuList overflowY="scroll" h="300px" boxShadow="lg">
               <HStack

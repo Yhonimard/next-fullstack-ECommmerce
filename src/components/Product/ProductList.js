@@ -8,7 +8,6 @@ import {
   Img,
   SimpleGrid,
   HStack,
-  Button,
   IconButton,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
