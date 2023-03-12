@@ -4,8 +4,8 @@ const initialState = {
   isLogin: false,
 };
 
-const GlobalState = createSlice({
-  name: "global",
+const AuthState = createSlice({
+  name: "auth",
   initialState,
   reducers: {
     isAuth(state, action) {
@@ -14,6 +14,6 @@ const GlobalState = createSlice({
   },
 });
 
-export const { isAuth, isUserId } = GlobalState.actions;
+export const { isAuth, isUserId } = AuthState.actions;
 
-export default GlobalState;
+export default AuthState;

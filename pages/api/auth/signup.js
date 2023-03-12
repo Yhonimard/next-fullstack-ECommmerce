@@ -2,6 +2,8 @@ import userSchema from "@//models/UserModels";
 import connectMongo from "@//utils/connectMongo";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
+import cartSchema from "@//models/CartModels";
 
 /**
  *

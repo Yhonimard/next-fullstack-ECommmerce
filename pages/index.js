@@ -1,6 +1,6 @@
 import ProductHeader from "@//components/Product/ProductHeader";
 import ProductList from "@//components/Product/ProductList";
-import { isAuth } from "@//redux/GlobalState";
+import { isAuth } from "@//redux/AuthState";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getCookie } from "cookies-next";
@@ -12,6 +12,7 @@ export default function Home({ data }) {
   useEffect(() => {
     const token = getCookie("token");
     const userId = getCookie("userid");
+
     if (token && userId) {
       dispatch(isAuth(true));
       dispatch(DataUserThunk(userId));

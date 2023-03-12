@@ -13,8 +13,8 @@ import productSchema from "@//models/ProductsModels";
 const handler = async (req, res) => {
   const { method } = req;
 
-  if (method !== "POST" && method !== "GET")
-    return res.status(405).json({ message: "method not allowed" });
+  // if (method !== "POST" && method !== "GET")
+  //   return res.status(405).json({ message: "method not allowed" });
 
   const userId = getCookie("userid", { req, res });
 
@@ -41,23 +41,37 @@ const handler = async (req, res) => {
       .status(404)
       .json({ message: "this user not found. could not add product to cart" });
 
-  let existingProduct;
+  // let existingProduct;
+  // try {
+  //   existingProduct = await productSchema.findById(productId);
+  // } catch (error) {
+  //   return res
+  //     .status(500)
+  //     .json({ message: "something went wrong, please try again" });
+  // }
+
+  // if (!existingProduct)
+  //   return res.status(404).json({ message: "this product doesn't exist" });
+
+  let existingCart;
+
   try {
-    existingProduct = await productSchema.findById(productId);
-  } catch (error) {
+    existingCart = await userSchema.findById(userId).populate("cart");
+  } catch (err) {
     return res
       .status(500)
-      .json({ message: "something went wrong, please try again" });
+      .json({ message: "cannot find this cart by this userId" });
   }
 
-  if (!existingProduct)
-    return res.status(404).json({ message: "this product doesn't exist" });
+  // if (existingCart) {
+  //   const createdCart = new cartSchema({
+  //     user: userId,
+  //     totalprice,
+  //     cart: [],
+  //   });
+  // }
 
-  const createdCart = new cartSchema({
-    user: userId,
-    totalPrice: "",
-  });
-
+  return res.json({ test: existingCart });
   // return res.status(200).json({ message: existingUser });
 };
 

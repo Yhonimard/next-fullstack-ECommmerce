@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { isAuth } from "../redux/GlobalState";
+import { isAuth } from "../redux/AuthState";
 import { CartIcon } from "../assets/Icon";
 import Link from "next/link";
 import {
@@ -22,7 +22,7 @@ import {
 import { deleteCookie } from "cookies-next";
 
 const Nav = () => {
-  const { isLogin } = useSelector((state) => state.global);
+  const { isLogin } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 

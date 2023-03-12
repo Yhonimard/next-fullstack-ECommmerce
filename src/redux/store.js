@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import GlobalState from "./GlobalState";
+import AuthState from "./AuthState";
 
 const store = configureStore({
   reducer: {
-    [GlobalState.name]: GlobalState.reducer,
+    [AuthState.name]: AuthState.reducer,
   },
 });
 
