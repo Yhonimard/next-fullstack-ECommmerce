@@ -24,7 +24,11 @@ const handler = async (req, res) => {
 
   try {
     products = await productSchema.findById(id);
-  } catch (error) {}
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "something went wrong pls try again" });
+  }
 
   if (!products)
     return res
@@ -33,7 +37,7 @@ const handler = async (req, res) => {
 
   return res.status(200).json({
     status: "success",
-    message: "fetching data by id success",
+    message: "fetching user data success",
     result: products.toObject({ getters: true }),
   });
 };

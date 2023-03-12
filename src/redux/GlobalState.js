@@ -14,6 +14,6 @@ const GlobalState = createSlice({
   },
 });
 
-export const { isAuth } = GlobalState.actions;
+export const { isAuth, isUserId } = GlobalState.actions;
 
 export default GlobalState;

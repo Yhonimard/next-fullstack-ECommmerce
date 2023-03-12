@@ -2,7 +2,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { LoginSchema } from "@//models/AuthSchema";
 import axios from "axios";
-import Cookies from "js-cookie";
 import {
   Box,
   Button,
@@ -10,12 +9,12 @@ import {
   Divider,
   FormControl,
   FormErrorMessage,
-  FormLabel,
   Heading,
   Input,
   Stack,
   Text,
 } from "@chakra-ui/react";
+import { setCookie } from "cookies-next";
 
 const LoginComponent = () => {
   const router = useRouter();
@@ -24,13 +23,15 @@ const LoginComponent = () => {
 
   const submitHandler = async (data) => {
     try {
-      const res = await axios.post("/api/auth/login", data).catch((error) => {
-        const err = error.response.data.message;
-        throw err;
-      });
+      const res = await axios
+        .post("/api/auth/login", data, { withCredentials: true })
+        .catch((error) => {
+          const err = error.response.data.message;
+          throw err;
+        });
 
       if (res.data.token) {
-        Cookies.set("token", res.data.token);
+        setCookie("token", res.data.token);
       }
     } catch (error) {
       console.log(error);
@@ -52,8 +53,8 @@ const LoginComponent = () => {
         border="lightgray 1px solid"
         py={4}
         px={5}
-        shadow="md"
-        borderRadius="md"
+        shadow="base"
+        borderRadius="lg"
         maxW="sm"
         minH="md"
         display="flex"

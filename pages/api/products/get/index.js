@@ -2,7 +2,6 @@ import productSchema from "@//models/ProductsModels";
 import connectMongo from "@//utils/connectMongo";
 
 /**
- *
  * @param {import("next").NextApiRequest} req
  * @param {import("next").NextApiResponse} res
  *
@@ -28,7 +27,6 @@ const handler = async (req, res) => {
     console.log(error);
     return res.status(500).json("fetching data failed");
   }
-
   res.status(201).json({
     status: "success",
     message: "fetching data success",

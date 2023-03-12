@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { isAuth } from "../redux/GlobalState";
 import { CartIcon } from "../assets/Icon";
-import Cookies from "js-cookie";
 import Link from "next/link";
 import {
   Avatar,
@@ -19,8 +18,8 @@ import {
   Button,
   Divider,
   Img,
-  VStack,
 } from "@chakra-ui/react";
+import { deleteCookie } from "cookies-next";
 
 const Nav = () => {
   const { isLogin } = useSelector((state) => state.global);
@@ -28,7 +27,8 @@ const Nav = () => {
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
-    Cookies.remove("token");
+    deleteCookie("token");
+    deleteCookie("userid");
     dispatch(isAuth(false));
   };
 
@@ -81,7 +81,7 @@ const Nav = () => {
                   boxSize="30px"
                   objectFit="cover"
                 />
-                <Flex w="50%" m={0} direction="column">
+                <Flex w="50%" direction="column">
                   <Text fontSize="sm" as="h6">
                     product title
                   </Text>

@@ -10,6 +10,7 @@ import {
   HStack,
   IconButton,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { useRouter } from "next/router";
 
 const ProductList = ({ data }) => {
@@ -17,6 +18,21 @@ const ProductList = ({ data }) => {
 
   const handleNavigate = (id) => {
     router.push(`/product-detail/${id}`);
+  };
+
+  const addToCartHanlder = async (data) => {
+    try {
+      const res = await axios.post("/api/cart", data).catch((err) => {
+        const errorMsg = err.response.data.message;
+        throw (
+          errorMsg ||
+          "something went wrong, cant add product to cart, pls try again"
+        );
+      });
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const { result: datas } = data;
@@ -53,6 +69,15 @@ const ProductList = ({ data }) => {
                   isRound
                   size="sm"
                   variant="ghost"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    addToCartHanlder({
+                      productId: i.id,
+                      quantity: 1,
+                      price: i.price,
+                    });
+                  }}
+                  zIndex={200000}
                 />
               </HStack>
             </CardBody>

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { SignupSchema } from "@//models/AuthSchema";
 import axios from "axios";
-import Cookies from "js-cookie";
+import { setCookie } from "cookies-next";
 import {
   Box,
   Button,
@@ -40,7 +40,7 @@ const SignupComponent = () => {
           throw err.response.data.message || "something went wrong ";
         });
       if (res.data.token) {
-        Cookies.set("token", res.data.token);
+        setCookie("token", res.data.token);
       }
     } catch (error) {
       console.log(error);
@@ -50,7 +50,6 @@ const SignupComponent = () => {
     router.replace("/");
   };
 
-  console.log(errors);
   return (
     <Container
       minH="100vh"
@@ -64,15 +63,15 @@ const SignupComponent = () => {
         border="lightgray 1px solid"
         py={4}
         px={5}
-        shadow="md"
-        borderRadius="md"
+        shadow="base"
+        borderRadius="lg"
         maxW="sm"
         minH="lg"
         display="flex"
         flexDirection="column"
         justifyContent="center"
       >
-        <Heading textAlign="center" lineHeight="short" mb={2}>
+        <Heading textAlign="center" lineHeight="short" mb={3}>
           SIGNUP
         </Heading>
         <Divider bgColor="blackAlpha.900" mb={7} />

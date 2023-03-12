@@ -30,9 +30,9 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
   const { pid } = params;
-  const { data } = await axios.get(
-    `http://localhost:3000/api/products/get/${pid}`
-  );
+  const res = await fetch(`http://localhost:3000/api/products/get/${pid}`);
+  const data = await res.json();
+
   return {
     props: {
       data,

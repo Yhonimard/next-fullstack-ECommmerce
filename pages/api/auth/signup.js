@@ -12,7 +12,6 @@ import jwt from "jsonwebtoken";
 const signup = async (req, res) => {
   if (req.method !== "POST")
     return res.status(405).json({ message: "method not allowed" });
-
   try {
     await connectMongo();
   } catch (error) {

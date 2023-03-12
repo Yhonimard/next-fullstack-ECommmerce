@@ -1,10 +1,6 @@
 import LoginComponent from "@//components/auth/LoginComponent";
 
 const login = () => {
-  return (
-    <>
-      <LoginComponent />
-    </>
-  );
+  return <LoginComponent />;
 };
 export default login;

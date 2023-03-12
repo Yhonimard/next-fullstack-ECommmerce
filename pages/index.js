@@ -3,16 +3,18 @@ import ProductList from "@//components/Product/ProductList";
 import { isAuth } from "@//redux/GlobalState";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import Cookies from "js-cookie";
-import axios from "axios";
+import { getCookie } from "cookies-next";
+import DataUserThunk from "@//redux/data-user-thunk";
 
 export default function Home({ data }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const token = Cookies.get("token");
-    if (token) {
+    const token = getCookie("token");
+    const userId = getCookie("userid");
+    if (token && userId) {
       dispatch(isAuth(true));
+      dispatch(DataUserThunk(userId));
       return;
     }
     dispatch(isAuth(false));
@@ -27,10 +29,12 @@ export default function Home({ data }) {
 }
 
 export const getStaticProps = async () => {
-  const { data } = await axios.get("http://localhost:3000/api/products/get");
+  const res = await fetch(`${process.env.HOST_URL}/api/products/get`);
+  const data = await res.json();
+
   return {
     props: {
-      data: data,
+      data,
     },
   };
 };

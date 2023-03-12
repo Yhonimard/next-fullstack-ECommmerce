@@ -13,7 +13,13 @@ const login = async (req, res) => {
   if (req.method !== "POST")
     return res.status(405).json({ message: "method not allowed" });
 
-  await connectMongo();
+  try {
+    await connectMongo();
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "cant login, something went wrong" });
+  }
 
   const { email, password } = req.body;
 
