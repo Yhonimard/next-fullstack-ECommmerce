@@ -48,6 +48,12 @@ const signup = async (req, res) => {
       .json({ message: "could not create user pls try again" });
   }
 
+  const createdCart = new cartSchema({
+    user: createdUser.id,
+    totalPrice: 0,
+    cart: [],
+  });
+
   const createdUser = new userSchema({
     username,
     email,
@@ -57,6 +63,9 @@ const signup = async (req, res) => {
   });
 
   try {
+    const sess = await mongoose.startSession();
+    sess.startTransaction();
+
     await createdUser.save();
   } catch (error) {
     return res.status(500).json({ message: "signup failed pls try again" });

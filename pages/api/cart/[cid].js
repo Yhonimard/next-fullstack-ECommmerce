@@ -3,6 +3,7 @@ import connectMongo from "@//utils/connectMongo";
 import cartSchema from "@//models/CartModels";
 import { getCookie } from "cookies-next";
 import productSchema from "@//models/ProductsModels";
+import mongoose from "mongoose";
 
 /**
  * @param {import("next").NextApiRequest} req
@@ -53,26 +54,32 @@ const handler = async (req, res) => {
   // if (!existingProduct)
   //   return res.status(404).json({ message: "this product doesn't exist" });
 
-  let existingCart;
-
+  let userWithCart;
   try {
-    existingCart = await userSchema.findById(userId).populate("cart");
+    userWithCart = await userSchema.findById(userId).populate("cart");
   } catch (err) {
     return res
       .status(500)
       .json({ message: "cannot find this cart by this userId" });
   }
+  if (!userWithCart.cart) {
+    const createdCart = new cartSchema({
+      user: userId,
+      totalPrice: 0,
+      cart: [],
+    });
+    try {
+      await createdCart.save();
+      userWithCart.cart = createdCart._id;
+      await userWithCart.save();
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ message: "something went wrong. cant add product to cart" });
+    }
+  }
 
-  // if (existingCart) {
-  //   const createdCart = new cartSchema({
-  //     user: userId,
-  //     totalprice,
-  //     cart: [],
-  //   });
-  // }
-
-  return res.json({ test: existingCart });
-  // return res.status(200).json({ message: existingUser });
+  return res.status(200).json({ message: userWithCart });
 };
 
 export default handler;
