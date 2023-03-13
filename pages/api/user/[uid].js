@@ -4,6 +4,7 @@ import connectMongo from "@//utils/connectMongo";
  *
  * @param {import("next").NextApiRequest} req
  * @param {*import("next").NextApiResponse} res
+ *
  */
 
 export default async function handler(req, res) {
@@ -21,9 +22,8 @@ export default async function handler(req, res) {
   }
 
   let findUser;
-
   try {
-    findUser = await userSchema.findById(userId);
+    findUser = await userSchema.findById(userId, "-password").populate("cart");
   } catch (error) {
     return res
       .status(500)
